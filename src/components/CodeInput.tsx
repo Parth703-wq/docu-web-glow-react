@@ -34,7 +34,6 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
       reader.onload = (e) => {
         const content = e.target?.result as string;
         setCode(content);
-        setInputMode('manual'); // Switch to manual mode to show the uploaded content
       };
       reader.onerror = (e) => {
         console.error('Error reading file:', e);
@@ -142,6 +141,29 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
                 </label>
               </div>
             </div>
+
+            {/* Display uploaded file content */}
+            {code && (
+              <div className="mt-6">
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Uploaded File Content
+                </label>
+                <div className="relative">
+                  <textarea
+                    value={code}
+                    readOnly
+                    className="w-full h-60 bg-slate-900 text-slate-200 rounded-lg p-4 border border-slate-600 resize-none font-mono text-sm leading-6"
+                    style={{ 
+                      tabSize: 2,
+                      fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace'
+                    }}
+                  />
+                  <div className="absolute bottom-4 left-4 text-xs text-slate-500">
+                    Lines: {code.split('\n').length} | Characters: {code.length}
+                  </div>
+                </div>
+              </div>
+            )}
           </>
         ) : (
           <>
