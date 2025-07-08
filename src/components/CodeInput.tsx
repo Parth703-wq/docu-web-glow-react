@@ -143,27 +143,6 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
           <>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-white">Code Input</h3>
-              <div className="flex items-center space-x-4">
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                  className="bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-600 focus:border-purple-500 focus:outline-none"
-                >
-                  <option value="typescript">TypeScript</option>
-                  <option value="python">Python</option>
-                  <option value="java">Java</option>
-                  <option value="csharp">C#</option>
-                </select>
-                <select
-                  value={docType}
-                  onChange={(e) => setDocType(e.target.value)}
-                  className="bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-600 focus:border-purple-500 focus:outline-none"
-                >
-                  <option value="function">Function Docs</option>
-                  <option value="class">Class Documentation</option>
-                  <option value="module">Module Overview</option>
-                </select>
-              </div>
             </div>
             
             <div className="relative">
