@@ -10,8 +10,8 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
   const [inputMode, setInputMode] = useState<'manual' | 'github'>('manual');
   const [code, setCode] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
-  const [docType, setDocType] = useState('api');
-  const [language, setLanguage] = useState('javascript');
+  const [docType, setDocType] = useState('function');
+  const [language, setLanguage] = useState('typescript');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const handleAnalyze = async () => {
@@ -29,8 +29,13 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
-      // Handle file upload logic here
-      console.log('Files uploaded:', files);
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        setCode(content);
+      };
+      reader.readAsText(file);
     }
   };
 
@@ -144,7 +149,6 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
                   onChange={(e) => setLanguage(e.target.value)}
                   className="bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-600 focus:border-purple-500 focus:outline-none"
                 >
-                  <option value="javascript">JavaScript</option>
                   <option value="typescript">TypeScript</option>
                   <option value="python">Python</option>
                   <option value="java">Java</option>
@@ -155,7 +159,6 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
                   onChange={(e) => setDocType(e.target.value)}
                   className="bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-600 focus:border-purple-500 focus:outline-none"
                 >
-                  <option value="api">API Documentation</option>
                   <option value="function">Function Docs</option>
                   <option value="class">Class Documentation</option>
                   <option value="module">Module Overview</option>
