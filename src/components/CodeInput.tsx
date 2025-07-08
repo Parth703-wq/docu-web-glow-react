@@ -34,6 +34,10 @@ const CodeInput: React.FC<CodeInputProps> = ({ onAnalyze }) => {
       reader.onload = (e) => {
         const content = e.target?.result as string;
         setCode(content);
+        setInputMode('manual'); // Switch to manual mode to show the uploaded content
+      };
+      reader.onerror = (e) => {
+        console.error('Error reading file:', e);
       };
       reader.readAsText(file);
     }
